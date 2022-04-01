@@ -11,6 +11,7 @@ Investigation template
 ![Hardware Component Diagream](assets/board-x-hardware-component-diagram.png)
 
 |Board name                                   | Board X |
+|---------------------------------------------|---------|
 |Processor                                    |         |
 |Flash                                        |         |
 |RAM                                          |         |
