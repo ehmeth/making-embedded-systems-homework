@@ -8,7 +8,7 @@ Or why, oh why do we need all the silicone to go to crypto miners?
 
 ### Board hardware
 
-![Hardware Component Diagram](assets/board-x-hardware-component-diagram.png)
+![Hardware Component Diagram](assets/stm32f429i-disc1-hardware-block-diagram.png)
 
 |                                             | 32F429IDISCOVERY              |
 |---------------------------------------------|-------------------------------|
@@ -33,7 +33,7 @@ STM32F7508-DK
 
 ### Board hardware
 
-![Hardware Component Diagram](assets/board-x-hardware-component-diagram.png)
+![Hardware Component Diagram](assets/stm32f7-discovery-hardware-block-diagram.png)
 
 |                                             | STM32F7508-DK                 |
 |---------------------------------------------|-------------------------------|
@@ -41,7 +41,7 @@ STM32F7508-DK
 |Flash                                        | 64 kb internal, 16 Mb external QSPI |
 |RAM                                          | Internal 340 kb SRAM, External 8 Mb SDRAM       |
 |ADC Features                                 | 3×12-bit, 2.4 MSPS ADC        |
-|Interesting peripherals                      | 4.3-inch 480x272 color LCD-TFT with capacitive touch screen, Ethernet connector, USB OTG port, SAI audio codec, 2 ST-MEMS digital microphones, microphone and speaker jack connectors, push buttons for reset and custom user input, on-board ST-LINK/V2-B |
+|Interesting peripherals                      | 4.3-inch 480x272 color LCD-TFT with capacitive touch screen, Ethernet connector, USB OTG port, SAI audio codec, 2 ST-MEMS digital microphones, microphone and speaker jack connectors, external camera connector, push buttons for reset and custom user input, on-board ST-LINK/V2-B |
 |Board price (Digikey, Mouser, Octopart)      | 58-79 USD                     |
 |Processor price                              | ~15 USD for a single chip, half of that in bulk, but none are available currently |
 
