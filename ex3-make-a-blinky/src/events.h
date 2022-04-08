@@ -4,8 +4,11 @@
 #include <stdbool.h>
 
 typedef enum {
+   evNone                 = 0,
    evBlinkTimeout         = 1 << 0,
-   evButtonStateChanged   = 1 << 1
+   evButtonStateChanged   = 1 << 1,
+   evButtonReleased       = 1 << 2,
+   evButtonPressed        = 1 << 3
 } eBlinkyEvents_t;
 
 void event_generate(eBlinkyEvents_t event);
