@@ -22,6 +22,6 @@ The heart of the system is the Lightning Controller, which takes audio input, us
 
 The system is designed to be as autonomous as possible, so in normal operation it defaults to power-on-and-forget. If no interaction is detected after 5 seconds from boot, the device will enter Normal Operation mode. 
 
-Nonetheless, after first installation or when issues are observed, the system needs to provide a service mode, which will allow the user to a) inspect if the connected LED strips have all LED diodes operational and the power distribution allows 100% intensity along the full length of the strip(s) and b) make sure the device microphone is able to capture the surrounding sound. The service mode will only be accessible on startup and use the device LCD screen. If service mode is entered, the system will go into Normal Operation mode after 30 seconds of user inactivity.
+Nonetheless, after first installation or when issues are observed, the system needs to provide a service mode, which will allow the user to a) set the length of installed LED strips, b) inspect if the connected LED strips have all LED diodes operational and the power distribution allows 100% intensity along the full length of the strip(s), and c) make sure the device microphone is able to capture the surrounding sound. The service mode will only be accessible on startup and use the device LCD screen. If service mode is entered, the system will go into Normal Operation mode after 30 seconds of user inactivity.
 
 ![System state machine](assets/system-sm.png)
