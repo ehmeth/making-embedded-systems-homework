@@ -34,3 +34,5 @@ Nonetheless, after first installation or when issues are observed, the system ne
 | SERVICE\_AUDIO\_LEVELS\_INSPECTION     | Display spectrum of sound in real time.<br>Timeout = 30s                                                                                                                                              | NORMAL\_OPERATION | SERVICE\_LED\_STRIP\_LENGTH\_SETTING   | OFF                   |
 | NORMAL\_OPERATION                      | Transform sounds into light                                                                                                                                                                           | \-                | \-                                     | OFF                   |
 | OFF                                    | Turn all LEDs off and turn off                                                                                                                                                                        | \-                | \-                                     | \-                    |
+
+The state machine is not terribly exciting, but the system is not meant to be UI intensive.
