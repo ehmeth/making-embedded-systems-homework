@@ -50,7 +50,7 @@ uint8_t popcountB(uint8_t value)
 }
 ```
 
-Can we do better? Of course! Let's try some bit-twiddling shenanigans! Bring you "Hacker's Delight" books and some pop-corn. (Get it? Pop-corn?)
+Can we do better? Of course! Let's try some bit-twiddling shenanigans! Bring your "Hacker's Delight" books and some pop-corn. (Get it? Pop-corn?)
 
 ```C
 uint8_t popcountC(uint8_t value)
