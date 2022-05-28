@@ -30,7 +30,7 @@ uint32_t popcountA(uint32_t value)
 }
 ```
 
-Not a bad start, in the worst case of `0x80` we'll loop 8 times to get to that last set bit, but hey, it works! We can even unroll the loop.
+Not a bad start, in the worst case of `0x80000000` we'll loop 32 times to get to that last set bit, but hey, it works! We can even unroll the loop.
 
 ```C
 uint32_t popcountB(uint32_t value)
