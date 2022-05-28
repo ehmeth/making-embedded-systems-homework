@@ -1,8 +1,7 @@
 Optimizing Algorithms
 =====================
 
-Today I will be exploring a few ways to calculate the number of set bits in an unsigned integer variable.
-The following implementations focus on 8-bit variables, but can fairly easily be extended to 16- and 32-bits.
+Today I will be exploring a few ways to calculate the number of set bits in an unsigned 32-bit integer.
 
 The number of set bits in an unsigned variable is also known as popcount or "population count".
 At first glance the problem seems like a typical CS 101 algorithmic riddle and the answer is not obviously useful.
@@ -17,9 +16,9 @@ Popcount implementations
 Let's start with the naive approach. Let's just try counting any set bits we find in a variable while there are some bits set.
 
 ```C
-uint8_t popcountA(uint8_t value)
+uint32_t popcountA(uint32_t value)
 {
-    uint8_t popcount = 0;
+    uint32_t popcount = 0;
     
     while (value)
     {
@@ -34,17 +33,41 @@ uint8_t popcountA(uint8_t value)
 Not a bad start, in the worst case of `0x80` we'll loop 8 times to get to that last set bit, but hey, it works! We can even unroll the loop.
 
 ```C
-uint8_t popcountB(uint8_t value)
+uint32_t popcountB(uint32_t value)
 {
-    uint8_t popcount = 
-        (value >> 0) & 0x1u +
-        (value >> 1) & 0x1u +
-        (value >> 2) & 0x1u +
-        (value >> 3) & 0x1u +
-        (value >> 4) & 0x1u +
-        (value >> 5) & 0x1u +
-        (value >> 6) & 0x1u +
-        (value >> 7) & 0x1u;
+    uint32_t popcount = 
+        (value >>  0) & 0x1u +
+        (value >>  1) & 0x1u +
+        (value >>  2) & 0x1u +
+        (value >>  3) & 0x1u +
+        (value >>  4) & 0x1u +
+        (value >>  5) & 0x1u +
+        (value >>  6) & 0x1u +
+        (value >>  7) & 0x1u +
+        (value >>  8) & 0x1u +
+        (value >>  9) & 0x1u +
+        (value >> 10) & 0x1u +
+        (value >> 11) & 0x1u +
+        (value >> 12) & 0x1u +
+        (value >> 13) & 0x1u +
+        (value >> 14) & 0x1u +
+        (value >> 15) & 0x1u +
+        (value >> 16) & 0x1u +
+        (value >> 17) & 0x1u +
+        (value >> 18) & 0x1u +
+        (value >> 19) & 0x1u +
+        (value >> 20) & 0x1u +
+        (value >> 21) & 0x1u +
+        (value >> 22) & 0x1u +
+        (value >> 23) & 0x1u +
+        (value >> 24) & 0x1u +
+        (value >> 25) & 0x1u +
+        (value >> 26) & 0x1u +
+        (value >> 27) & 0x1u +
+        (value >> 28) & 0x1u +
+        (value >> 29) & 0x1u +
+        (value >> 30) & 0x1u +
+        (value >> 31) & 0x1u;
     
     return popcount;
 }
@@ -53,9 +76,9 @@ uint8_t popcountB(uint8_t value)
 Can we do better? Of course! Let's try some bit-twiddling shenanigans! Bring your "Hacker's Delight" books and some pop-corn. (Get it? Pop-corn?)
 
 ```C
-uint8_t popcountC(uint8_t value)
+uint32_t popcountC(uint32_t value)
 {
-    uint8_t popcount = 0;
+    uint32_t popcount = 0;
 
     while (value) {
         // clear least significant set bit 
@@ -74,9 +97,9 @@ On one hand, we'll reduce the number of loop iterations, on the other... loop un
 Next we can move to look-up tables.
 
 ```C
-uint8_t popcountD(uint8_t x)
+uint32_t popcountD(uint32_t x)
 {
-    static const uint8_t LUT[] = {
+    static const uint32_t LUT[] = {
         0, 1, 1, 2, 1, 2, 2, 3, 
         1, 2, 2, 3, 2, 3, 3, 4, 
         1, 2, 2, 3, 2, 3, 3, 4, 
@@ -110,7 +133,11 @@ uint8_t popcountD(uint8_t x)
         4, 5, 5, 6, 5, 6, 6, 7, 
         5, 6, 6, 7, 6, 7, 7, 8, 
     };
-   return LUT[x];
+    return 
+        LUT[(x >>  0) & 0xFF] +
+        LUT[(x >>  8) & 0xFF] +
+        LUT[(x >> 16) & 0xFF] +
+        LUT[(x >> 24) & 0xFF];
 }
 ```
 
@@ -119,14 +146,22 @@ That's a lot of constants, but the resulting assembly will probably be quite sho
 How about we try a less flash-intensive middle ground?
 
 ```C
-uint8_t popcountE(uint8_t n)
+uint32_t popcountE(uint8_t x)
 {
     static const uint8_t lookup[16] = {
         0, 1, 1, 2, 1, 2, 2, 3,
         1, 2, 2, 3, 2, 3, 3, 4 
     };
    
-    return (lookup[n&0xF] << 4) + lookup[n>>4];
+    return 
+        lookup[(x >>  0) &0xF] +
+        lookup[(x >>  4) &0xF] +
+        lookup[(x >>  8) &0xF] +
+        lookup[(x >> 12) &0xF] +
+        lookup[(x >> 16) &0xF] +
+        lookup[(x >> 20) &0xF] +
+        lookup[(x >> 24) &0xF] +
+        lookup[(x >> 28) &0xF];
 }
 ```
 
@@ -135,10 +170,10 @@ That looks like a fair compromise.
 And if you're using GCC and trust the compiler people, you can just use their implementation and save yourself the hassle.
 
 ```C
-uint8_t popcountF(uint8_t n)
+uint32_t popcountF(uint32_t n)
 {
-      return __builtin_popcount(n);
+      return __builtin_popcountl(n);
 }
 ```
 
-And that's it! You can see all the above code examples [here](https://godbolt.org/z/ooez9ffhr) and experiment with other compilers and all their options. Have fun!
+And that's it! You can see all the above code examples [here](https://godbolt.org/z/GPPdPercf) and experiment with other compilers and all their options. Have fun!
